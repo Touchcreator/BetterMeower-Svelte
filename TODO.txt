@@ -1,0 +1,73 @@
+ew svelte todo:
+done (preview 1):
+- search page
+- Bettermeower pfp support
+- statisics
+- txt file of bots
+- dont allow verified bot posts to be reported
+- image links showing as images?
+
+done (preview 2):
+- enter user name and go to profile
+- crash bug fix (hopefully)
+- 10% finished mod panel
+- changelog
+- added "Badge" to Roblox888i for 200th chat (please dont beg for badges)
+- make so you dont have to log in for search bar and changelog
+
+done (preview 3):
+- sidebar transition
+
+done for release:
+- banned status
+- webhooks (use showier branch)
+
+done for bettermeower:
+- make alert that happens when using webhooks as guest
+- cancel changing pfp
+- search users, posts and stuff
+- store Close disconnection Modals setting in localstorage
+- dev mode: open modal
+- dev mode: change page
+- dev mode: generate dialog modal
+
+josh do:
+- fix images
+
+doing:
+
+to do:
+- dev mode: change server
+- message link that links to post (maybe IN A MODAL) (cant show surrounding)
+- offsite links
+- copy post id for message link
+- add to chat button on profiles (for adding users to gc via search)
+- markdown
+- dev mode: change store vars
+- dev mode: change localstorage vars (NOT USER + PASS)
+- codebase changes relating modals that only have text being changed to the new dialogs
+
+last minute features:
+- webhooks custom profile
+- log out everywhere
+- custom themes (how save?)
+
+maybe?????:
+- dev mode: emulate server
+- another pfp for bots
+- make modal system better
+
+cl4 port:
+- for image sharing, custom alt text
+- img.bb image sharing (people need to generate their own api keys)
+- goto a meower msg (in recent posts)
+
+ew thats a worse sgerb thing:
+- BGM
+
+cats url rewrite:
+- idk like mesage links
+
+serverside needed:
+- make some sort of system for if the username matches another username with l or uppercase i (Roblox suggested this i think)
+- last online and go to last meower msg
