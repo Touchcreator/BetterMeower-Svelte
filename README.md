@@ -40,8 +40,7 @@ Requirements:
 
 To clone and run a development server on your machine (that auto-updates when you modify files):
 
-```
-git clone https://github.com/BetterMeower-Project/BetterMeower
+```git clone https://github.com/BetterMeower-Project/BetterMeower-Svelte
 cd BetterMeower
 npm install
 npm run dev
