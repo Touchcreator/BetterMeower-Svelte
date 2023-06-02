@@ -39,8 +39,10 @@
 		</div>
 		<p class="member-name">{member}</p>
 	</div>
+{:else if error == "Error: response code not OK; code 404"}
+	<div class="error">Chat member "{member}" isn't a valid Meower username. Check your spelling and try again.</div>
 {:else}
-	<div class="error">error loading member {member}: {error}</div>
+ <div class="error">Error loading chat member {member} because of "{error}"</div>
 {/if}
 
 <style>

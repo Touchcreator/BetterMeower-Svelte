@@ -40,7 +40,7 @@
                 name="userinput"
 
                 autocomplete="false"
-                maxlength="360"
+                maxlength="20"
 
 				bind:value={username}
             >

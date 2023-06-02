@@ -120,8 +120,15 @@
 			Here are {$profileClicked}'s recent posts.
 		</Container>-->
 		{#if posts.length < 1}
-			{$profileClicked} hasn't made any posts yet.
+		<Container>
+			<h2>Recent Posts</h2>
+			Hmm, looks like <b>{$profileClicked}</b> hasn't made any posts yet.
+		</Container>
 		{:else}
+		<Container>
+			<h2>Recent Posts</h2>
+			Here are {$profileClicked}'s recent posts
+		</Container>
 			{#each posts as post (post.id)}
 				<div
 					transition:fly|local="{{y: -50, duration: 250}}"
@@ -147,7 +154,7 @@
 		</div>
 	{:catch error}
 		<Container>
-			<h1>{$profileClicked}'s Recent Posts</h1>
+			<h2>Recent Posts</h2>
 			Error loading posts. Please try again.
 			<pre><code>{error}</code></pre>
 		</Container>

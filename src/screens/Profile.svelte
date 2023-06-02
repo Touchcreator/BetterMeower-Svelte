@@ -110,8 +110,30 @@
 						></button>
 					</div>
 				{/if}
-				<h3>Quote</h3>
+				<h2>{$profileClicked}'s Quote</h2>
 				<p>"<i>{data.quote}</i>"</p>
+			</Container>
+		{:else}
+		<Container>
+				{#if $profileClicked === $user.name}
+					<div class="settings-controls">
+						<button
+							class="circle join"
+							on:click = {()=>{
+								modalPage.set("setQuote");
+								modalShown.set(true);
+							}}
+						></button>
+					</div>
+				{/if}
+			
+				{#if $profileClicked === $user.name}
+					<h2>{$profileClicked}'s Quote</h2>
+					Hmm, looks like you don't have a quote. You can set one by clicking the quote icon at the top right corner of the quote box.
+				{:else}
+					<h2>{$profileClicked}'s Quote</h2>
+					Hmm, looks like <b>{$profileClicked}</b> doesn't have a quote.
+				{/if}
 			</Container>
 		{/if}
 
