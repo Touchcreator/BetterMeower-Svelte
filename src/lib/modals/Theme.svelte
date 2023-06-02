@@ -67,6 +67,7 @@
             modalPage.set("ctheme");
         }}>Custom Theme</button> -->
         
+        <br>
         <div class="modal-buttons" style="grid-column-start: 1;">
             <button on:click={() => {
                 $modalShown = false;
