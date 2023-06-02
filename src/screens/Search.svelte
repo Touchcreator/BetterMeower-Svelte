@@ -26,28 +26,28 @@
         Find all the legit users, memes and namesnipes.
     </Container>
     <Container>
-        <div class="settings-controls">
+       <!-- <div class="settings-controls">
             <button
-                class="circle search"
+                class="circle search disabled"
                 on:click={() => {
                     search_mode.set("posts")
                     Show("Search")
                 }}
             ></button>
-        </div>
+        </div> -->
 
         <h1>Search Posts</h1>
         <s>Find posts and maybe even relics.</s> <b>Searching for posts is currently disabled for server maintenence.</b>
     </Container>
     <Container>
         <div class="settings-controls">
-            <!-- <button
+            <button
                 class="circle search"
                 on:click = {()=>{
                     modalPage.set("Stats");
 					modalShown.set(true);
                 }}
-            ></button> -->
+            ></button>
         </div>
 
         <h1>Stats</h1>
