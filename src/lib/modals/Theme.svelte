@@ -63,9 +63,9 @@
 			clm.updateProfile();
         }}>Purple</button>
 
-        <button on:click={() => {
+        <!-- <button on:click={() => {
             modalPage.set("ctheme");
-        }}>Custom Theme</button>
+        }}>Custom Theme</button> -->
         
         <div class="modal-buttons" style="grid-column-start: 1;">
             <button on:click={() => {
