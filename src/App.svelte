@@ -43,11 +43,12 @@
 		screen, setupPage,
 		modalShown, modalPage,
 		disconnected, disconnectReason,
-		user, spinner
+		user, spinner, modPanelOpen
 	} from "./lib/stores.js";
-	import {tick} from "svelte"
+	import {tick} from "svelte/internal"
 	import {shiftHeld} from "./lib/keyDetect.js";
     import SetQuote from "./lib/modals/SetQuote.svelte";
+    import ModPanel from "./lib/ModPanel.svelte";
 
 	// let notificationRequest = Notification.requestPermission();
 </script>
@@ -73,6 +74,21 @@ IS NEEDED FOR THE TRANSITION TO WORK
 	class:layout-old={$user.layout === "old"}
 	class:layout-mobile={$mobile}
 >
+	{#if $modPanelOpen}
+		<div class="mod-panel">
+			<Modal
+				on:close={() => {
+					$modPanelOpen = false;
+				}}
+			>
+				<div slot="header">
+					<h1>Moderation Panel</h1>
+				</div>
+				<ModPanel />
+			</Modal>
+		</div>
+	{/if}
+
 	{#if $disconnected}
 		<Modal>
 			<h2 slot="header">

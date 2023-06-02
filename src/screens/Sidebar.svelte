@@ -9,12 +9,13 @@
 		chatid,
 		modalShown,
 		modalPage,
+		modPanelOpen
 	} from "../lib/stores.js";
 	import {shiftHeld} from "../lib/keyDetect.js";
 	
 	import * as clm from "../lib/clmanager.js";
 
-	import {tick} from "svelte";
+	import {tick} from "svelte/internal";
 	import {fade} from 'svelte/transition';
 
 	import logo from "../assets/logo.svg";
@@ -28,6 +29,7 @@
 	import logout from "../assets/logout.svg";
 	import search from "../assets/search.svg";
 	import changelog from "../assets/changelog.svg";
+	import shield from "../assets/shield.svg";
 	import PFP from "../lib/PFP.svelte";
 
 	/**
@@ -162,6 +164,19 @@
 		/>
 	</button>
 	-->
+	{#if $user.lvl >= 1}
+        <button
+            on:click={() => ($modPanelOpen = !$modPanelOpen)}
+            class="modpanel-btn round"
+        >
+            <img
+                src={shield}
+                alt="Open/close moderator panel"
+                height="auto"
+                draggable={false}
+            />
+        </button>
+    {/if}
 	<span class="pfp" on:click={() => {
 		if (shiftHeld) {
 			goto("developersettings");

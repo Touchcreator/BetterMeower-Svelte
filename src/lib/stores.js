@@ -41,6 +41,10 @@ export const User_ToMod = writable("");
 // Last post clicked
 export const postClicked = writable({});
 
+export const announcementToSend = writable("");
+export const modPanelOpen = writable(false);
+export const userToMod = writable("");
+
 // Last profile clicked
 export const profileClicked = writable("");
 
