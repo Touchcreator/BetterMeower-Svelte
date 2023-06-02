@@ -1,10 +1,10 @@
-# BetterMeower
-BetterMeower is a fork of Meower Svelte with some new and improved features!
+# BetterMeower Classic
+BetterMeower Classic (aka BetterMeower Svelte) is a fork of Meower Svelte with some new and improved features!
 
-## [Launch BetterMeower](https://open.bettermeower.app)
+## [Launch BetterMeower Classic](https://classic.bettermeower.app)
 
 ## Features
-BetterMeower contains many new features and improvements over standard Meower, including (but not limited to)
+BetterMeower Classic contains many new features and improvements over standard Meower, including (but not limited to)
 
 ✅ Better dark orange theme
 
