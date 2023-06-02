@@ -200,7 +200,7 @@
 		</div>
 	{:else if $page === "reconnect"}
 		<div class="fullcenter">
-			Reconnecting...
+			Reconnecting to Meower Servers...
 		</div>
 	{:else if $page === "welcome"}
 		<div class="fullcenter">
@@ -280,7 +280,7 @@
 					}}>Go back</button>
 					<button type="submit">Login</button>
 				</div>
-				<p><i>BetterMeower never saves your username and password to external servers. Your data is encrypted and is only ever sent to the Meower Server.</i></p>
+				<p><i>BetterMeower Classic never saves your username and password to external servers. Your data is encrypted and is only ever sent to the Meower Server.</i></p>
 			</form>
 		</div>
 	{:else if $page === "join"}
