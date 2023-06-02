@@ -67,7 +67,7 @@
 		{
 			cmd: "terminate",
 			name: "Terminate (Permanent)",
-			description: "Bans the user, preventing them from logging back in, while also deleting all of their posts, chats and their profile. This action is permanent and cannot be undone.",
+			description: "Bans the user, preventing them from logging back in, and deletes all of their posts.",
 			level: 3,
 		},
 	];
