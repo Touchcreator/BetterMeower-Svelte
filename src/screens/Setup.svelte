@@ -235,7 +235,7 @@
 				<p class="small">(Several features will be unavailable while not logged in.)</p>
 				<!-- <p class="small">{(linkUrl == "wss://botserver.bettermeower.app/" && "Testing") || (linkUrl == "wss://api.meower.org/v0/cloudlink/" && "Main") || "Other"} Server ({linkUrl})</p> -->
 				<div>
-					<p class="small">BetterMeower v1.5.0</p>
+					<p class="small">BetterMeower Classic v1.0 (Based on BetterMeower v1.5.0)</p>
 					<img
 						src={meowy}
 						alt=""
