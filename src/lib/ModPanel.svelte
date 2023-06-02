@@ -85,6 +85,7 @@
 		closes that user/post's report, if there's one.
 	</p>
 	<h2>Get User Info</h2>
+    <h3>(Note: This was directly ported from vanilla meower, and may have bugs)</h3>
 	<form
 		on:submit|preventDefault={async e => {
 			/** @type {HTMLFormElement} */
