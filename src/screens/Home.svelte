@@ -22,6 +22,7 @@
 	import {flip} from 'svelte/animate';
     import Dialog from "../lib/Dialog.js";
     import { playNotification } from "../lib/sounds.js";
+    import Sidebar from "./Sidebar.svelte";
     //import AddMember from "src/lib/modals/AddMember.svelte";
 	//Zed just told me the cl4 port will move the mod panel to a seperate site
 
@@ -221,12 +222,14 @@
 			<h1>Home</h1>
 			{#if $user.name}
 				Welcome back <b>@{$user.name}!</b>
+			{:else}
+				<b>Hello guest</b>! To sign in or create an account, click the profile button on the sidebar.
 			{/if}
 		</Container>
 		<Container>
 			{#if _ulist.length === 0}
 				{#if $disconnected}
-					Sadly, You were disconnected, Happens to the best of us.
+					Hmmm, looks like you were disconnected from the server.
 					<br>
 					There are currently 0 users online
 				{:else}

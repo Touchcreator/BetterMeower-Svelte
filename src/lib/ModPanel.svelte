@@ -1,4 +1,5 @@
 <script>
+	import PostList from "./PostList.svelte";
 	import FormattedDate from "./FormattedDate.svelte";
 	import * as clm from "./clmanager.js";
 	import {levels} from "./formatting.js";
@@ -79,13 +80,12 @@
 </script>
 
 <div class="ModPanel">
-	<p>
-		Be careful, most these actions (except for sending announcements) have
-		no confirmation.<br />Also, performing an action on a user/post also
-		closes that user/post's report, if there's one.
-	</p>
-	<h2>Get User Info</h2>
-    <h3>(Note: This was directly ported from vanilla meower, and may have bugs)</h3>
+    {#if $user.lvl < 1}
+		<h2>Hey! It appears that you aren't a moderator :(</h2>
+		<h3>Only moderators can access the Moderation Panel. If you were recently promoted to moderator status, you may need to refresh the page.</h3>
+		<i><b>Still not working?</b> Hold down Shift while clicking the refresh button to clear BetterMeower's cache, and if it still isn't working, contact someone in the Meower Council.</i>
+	{:else}
+	<h3>Get User Info</h3>
 	<form
 		on:submit|preventDefault={async e => {
 			/** @type {HTMLFormElement} */
@@ -162,9 +162,9 @@
 	</form>
 	{#if ipData}
 		<div class="ip-info">
-			{#if $user.lvl < 2}<i
-					>Note: IP information is level 2+ ({levels[2]} and above) only.</i
-				><br />{/if}
+			{#if $user.lvl < 2}<b>Just so you know,</b> only level 2 moderators (and above) can access IP info!
+					<br />{/if}
+			<br>
 			<b>Username:</b>
 			<a
 				href="/"
@@ -205,7 +205,8 @@
 			{/if}
 		</div>
 	{/if}
-	<h2>Send Alert</h2>
+	<br>
+	<h3>Send Alert</h3>
 	<form
 		on:submit|preventDefault={async e => {
 			/** @type {HTMLFormElement} */
@@ -217,7 +218,7 @@
 			const text = f.elements[2].value;
 
 			if (!user || !text) {
-				alertMsg = "You need to enter a username and text!";
+				alertMsg = "You need to enter a username and an alert message!";
 				return;
 			}
 			try {
@@ -246,47 +247,48 @@
 		</div>
 		<textarea
 			class="alert-textarea white"
-			placeholder="Alert text here..."
+			placeholder="Enter your alert message here..."
 		/>
 		{#if alertMsg}
 			<div class="msg">{alertMsg}</div>
 		{/if}
 	</form>
-	<h2>Send Announcement</h2>
-	{#if $user.lvl < 3}
-		<p>Level 3+ ({levels[3]} and above) only.</p>
-	{:else}
-		<form
-			on:submit|preventDefault={async e => {
-				/** @type {HTMLFormElement} */
-				// @ts-ignore
-				const f = e.target;
-				// @ts-ignore
-				const text = f.elements[0].value;
+	{#if $user.lvl > 3}
+	<br>
+	<h3>Send Announcement</h3>
+	<!--<form
+		on:submit|preventDefault={async e => {
+			/** @type {HTMLFormElement} */
+			// @ts-ignore
+			const f = e.target;
+			// @ts-ignore
+			const text = f.elements[0].value;
 
-				if (!text) {
-					announceMsg = "You need to enter some text!";
-					return;
-				}
-				announceMsg = "";
-				$announcementToSend = text;
-				$modalPage = "announce";
-				$modalShown = true;
-			}}
-		>
-			<textarea
-				class="announce-textarea white"
-				placeholder="Announcement text here..."
-			/>
-			<div class="announce-buttons">
-				<button class="align-right">Send</button>
-				{#if announceMsg}
-					<div class="msg">{announceMsg}</div>
-				{/if}
-			</div>
-		</form>
+			if (!text) {
+				announceMsg = "You need to enter some text!";
+				return;
+			}
+			announceMsg = "";
+			$announcementToSend = text;
+			$modalPage = "announce";
+			$modalShown = true;
+		}}
+	>
+		<textarea
+			class="announce-textarea white"
+			placeholder="Announcement text here..."
+		/>
+		<div class="announce-buttons">
+			<button class="align-right">Send</button>
+			{#if announceMsg}
+				<div class="msg">{announceMsg}</div>
+			{/if}
+		</div>
+	</form> -->
+	<p>Sorry, making announcements is currently broken on BetterMeower. We're planning on fixing this soon!</p>
 	{/if}
-	<h2>Moderate User</h2>
+	<br>
+	<h3>Moderate User</h3>
 	<form
 		on:submit|preventDefault={async e => {
 			/** @type {HTMLFormElement} */
@@ -351,26 +353,30 @@
 			</p>{/if}
 		{#if actionType === "block"}
 			<p>
-				<b>NOTE:</b> IP bans in CL3 aren't very secure, and can easily be
-				bypassed. If you can, please also ask a council member somewhere
-				like Discord to also ban the IP through WAF (make sure to send both
-				the username and IP).
+				<b>Hey, just so you know,</b> banning users through IP isn't very secure in CL3. Instead, we recommend contacting someone with access to the Meower Cloudflare who can WAF ban them.
 			</p>
 		{/if}
 		{#if actionType === "unblock"}
 			<p>
-				<b>NOTE:</b> If you can, please also ask a council member somewhere
-				like Discord to also uban the IP through WAF (make sure to send both
-				the username and IP).
+				<b>Hey, just so you know,</b> when unbanning IP addresses in CL3, you should also contact someone with access to the Meower Cloudflare who can also revoke any WAF bans.
 			</p>
 		{/if}
 		{#if actionMsg}
 			<div class="msg">{actionMsg}</div>
 		{/if}
 	</form>
-	<h2>Reports</h2>
-</div>
+	<br>
+	<h3>Reports</h3>
+	<PostList bind:items fetchUrl="reports" postOrigin="" canPost={false}>
+		<div slot="error" let:error>
+			Oops! Couldn't load the report queue. Try reloading the moderation panel.
+			<i>Error occured: <pre><code>{error}</code></pre></i>
+		</div>
+		<div slot="empty">Yay, the report queue is empty!</div>
+	</PostList>
 
+	{/if}
+</div>
 <style>
 	h2 {
 		margin-top: 0.5em;
