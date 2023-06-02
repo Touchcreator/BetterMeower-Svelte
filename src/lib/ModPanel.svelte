@@ -18,7 +18,10 @@
 	let infoMsg = "";
 	let alertMsg = "";
 	let actionMsg = "";
-	let announceMsg = "";
+	// let announceMsg = "";
+	let displayedUserCount = 10;
+	let showAllUsers = false;
+
 
 	let actionType = "kick";
 
@@ -26,45 +29,45 @@
 		{
 			cmd: "kick",
 			name: "Kick",
-			description: "Disconnect this user; they can just reconnect.",
+			description: "Disconnects the user, while still allowing them to log back in.",
 			level: 1,
 		},
 		{
 			cmd: "clear_user_posts",
-			name: "Delete all posts",
-			description: "Delete all of the user's home posts.",
+			name: "Delete all posts (Permanent)",
+			description: "Delete all of the user's posts that were made in home. This action is permanent and cannot be undone.",
 			level: 1,
 		},
 		{
 			cmd: "ban",
 			name: "Ban",
 			description:
-				"Ban the user; kick them and prevent them from logging in on the account.",
+				"Disconnects the user and bans them, preventing them from logging back in.",
 			level: 1,
 		},
 		{
 			cmd: "pardon",
 			name: "Unban",
-			description: "Unban the user.",
+			description: "Unbans the user, allowing them to log back in.",
 			level: 1,
 		},
 		{
 			cmd: "block",
 			name: "Ban IP",
 			description:
-				"Ban the IP; prevent them from connecting through that IP.",
+				"Bans the specified IP address, preventing use of the IP address for creating accounts and logging in.",
 			level: 2,
 		},
 		{
 			cmd: "unblock",
 			name: "Unban IP",
-			description: "Unban the IP.",
+			description: "Unbans the specified IP address, allowing use of the IP address for creating accounts and logging in.",
 			level: 2,
 		},
 		{
 			cmd: "terminate",
-			name: "Terminate",
-			description: "Ban the user and delete all of their posts.",
+			name: "Terminate (Permanent)",
+			description: "Bans the user, preventing them from logging back in, while also deleting all of their posts, chats and their profile. This action is permanent and cannot be undone.",
 			level: 3,
 		},
 	];
@@ -139,6 +142,7 @@
 							val: isIP && isL2 ? _ipData.last_user : username,
 						},
 					})
+				
 				).payload;
 				ipData = _ipData;
 				infoMsg = "";
