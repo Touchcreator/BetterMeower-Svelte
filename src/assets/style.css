@@ -258,3 +258,8 @@ hr {
 a {
     color: #ffffff
 }
+
+button.trash {
+    background-image: url("./trash.svg");
+    background-size: 56%;
+}

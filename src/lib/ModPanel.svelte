@@ -211,6 +211,9 @@
 	{/if}
 	<br>
 	<h3>Send Alert</h3>
+	<b>Hey, just so you know,</b> alerting users on Meower is <b>not</b> annonymous anymore. If you falsely alert people repeatedly, you may be demoted to a lower level or have moderation permissions revoked entirely.
+	<br>
+	<p></p>
 	<form
 		on:submit|preventDefault={async e => {
 			/** @type {HTMLFormElement} */
@@ -363,6 +366,11 @@
 		{#if actionType === "unblock"}
 			<p>
 				<b>Hey, just so you know,</b> when unbanning IP addresses in CL3, you should also contact someone with access to the Meower Cloudflare who can also revoke any WAF bans.
+			</p>
+		{/if}
+		{#if actionType === "ban"}
+			<p>
+				<b>Hey, just so you know,</b> banning users on Meower is <b>not</b> annonymous anymore. If you falsely ban people repeatedly, you may be demoted to a lower level or have moderation permissions revoked entirely.
 			</p>
 		{/if}
 		{#if actionMsg}

@@ -1,125 +1,143 @@
 <!-- A post. Profile pictures not appearing while not logged in is intentional. -->
-
 <script>
 	import Container from "../lib/Container.svelte";
-	import PFP from "../lib/PFP.svelte";
+	import PFP from "./PFP.svelte";
 	import FormattedDate from "./FormattedDate.svelte";
+	import Badge from "./Badge.svelte";
+
+	import LiText from "./LiText.svelte";
 
 	import {
-		 profileClicked,
-		postClicked, user,
-		chatid, ulist,
+		profileClicked,
+		postClicked,
+		user,
+		chatid,
+		ulist,
 		mainPage as page,
-		modalShown, modalPage
+		modalShown,
+		modalPage,
 	} from "../lib/stores.js";
 	import {shiftHeld} from "../lib/keyDetect.js";
 	import * as clm from "../lib/clmanager.js";
-	
-	import {default as loadProfile, profileCache} from "../lib/loadProfile.js";
-	
-	import {onMount} from "svelte";
-	import * as emoji from "node-emoji";
 
-	import DOMPurify from "dompurify";
-    import snarkdown from "snarkdown";
+	import {default as loadProfile, profileCache} from "../lib/loadProfile.js";
+
+	import {onMount, tick} from "svelte";
 
 	export let post = {};
 	export let buttons = true;
 	export let input = null;
+	export let canDoActions = true;
 
 	let bridged = false;
-
 	let webhook = false;
-	let img1;
 
-	let post_list = []
+	let images = [];
 
+	// IP grabber sites exist, and I don't know if hosting a proxy is feasible
+	// WARNING: Put a / at the end of each URL so it can't be bypassed
+	// (like https://http.meower.org@evilsite.bad)!
+	const IMAGE_HOST_WHITELIST = [
+		// Meower
+		"https://http.meower.org/",
+		"https://assets.meower.org/",
+		"https://forums.meower.org/",
+		"https://go.meower.org/", // not everyone can add urls to go.meower.org, should be fine
+		"https://nc.meower.org/",
+
+		// cubeupload
+		"https://u.cubeupload.com/",
+		"https://cubeupload.com/",
+
+		// ImgBB
+		"https://i.ibb.co/",
+
+		// Tenor
+		"https://media.tenor.com/",
+		"https://tenor.com/",
+		"https://c.tenor.com/",
+
+		// Scratch (assets file uploading exists)
+		"https://assets.scratch.mit.edu/",
+		"https://cdn2.scratch.mit.edu/",
+		"https://cdn.scratch.mit.edu/",
+		"https://uploads.scratch.mit.edu/",
+
+		// Discord
+		"https://cdn.discordapp.com/",
+	];
 
 	// TODO: make bridged tag a setting
 
-	// TODO: more then 1 img + optimize getimgs function
-
 	/**
-	 * Initialize this post's user profile
+	 * Initialize this post's special behavior (user profile, images)).
 	 */
 	function initPostUser() {
 		if (!post.user) return;
 
 		if (post.content.includes(":")) {
-			if (post.user == "Discord") {
-				bridged = true;	
-			}
-			if (post.user == "Webhooks") {
-				webhook = true;
-			}
+			bridged =
+				post.user === "Discord" ||
+				post.user === "revolt" ||
+				post.user === "Revower";
+			webhook = post.user == "Webhooks";
 		}
-		
+
 		if (bridged || webhook) {
 			post.user = post.content.split(": ")[0];
-			post.content = post.content.slice(post.content.indexOf(": ")+1);
+			post.content = post.content.slice(post.content.indexOf(": ") + 1);
 		}
 
-		if (post.user == "Webhooks" && post.content.includes(":")) {
-			webhook = true;
-		}
+		// Match image syntax
+		// ([title: https://url])
+		const iterator = post.content.matchAll(
+			/\[([^\]]+?): (https:\/\/[^\]]+?)\]/gs
+		);
+		images = [];
+		while (true) {
+			const result = iterator.next();
+			if (result.done) break;
 
-		if (post.user == "Webhooks" && post.content.includes(":")) {
-			post.user = post.content.split(": ")[0];
-			post.content = post.content.slice(post.content.indexOf(": ")+1);
-		}
-
-		var urlRegex = /((?:(http|https|Http|Https|rtsp|Rtsp):\/\/(?:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,64}(?:\:(?:[a-zA-Z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-fA-F0-9]{2})){1,25})?\@)?)?((?:(?:[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}\.)+(?:(?:aero|arpa|asia|a[cdefgilmnoqrstuwxz])|(?:biz|b[abdefghijmnorstvwyz])|(?:cat|com|coop|c[acdfghiklmnoruvxyz])|d[ejkmoz]|(?:edu|e[cegrstu])|f[ijkmor]|(?:gov|g[abdefghilmnpqrstuwy])|h[kmnrtu]|(?:info|int|i[delmnoqrst])|(?:jobs|j[emop])|k[eghimnrwyz]|l[abcikrstuvy]|(?:mil|mobi|museum|m[acdghklmnopqrstuvwxyz])|(?:name|net|n[acefgilopruz])|(?:org|om)|(?:pro|p[aefghklmnrstwy])|qa|r[eouw]|s[abcdeghijklmnortuvyz]|(?:tel|travel|t[cdfghjklmnoprtvwz])|u[agkmsyz]|v[aceginu]|w[fs]|y[etu]|z[amw]))|(?:(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[0-9])))(?:\:\d{1,5})?)(\/(?:(?:[a-zA-Z0-9\;\/\?\:\@\&\=\#\~\-\.\+\!\*\'\(\)\,\_])|(?:\%[a-fA-F0-9]{2}))*)?(?:\b|$)/gi;
-
-		var Mentionre = /\B@\w+/g; 
-
-		/*
-		post.content = post.content.replace(urlRegex, function(url) {
-			return '<a href="https://' + url + '">' + url + "</a>";
-		}); 
-
-		post.content = post.content.replace(Mentionre, function(mention) {
-			return '<p class="mention">' + mention + "</p>";
-		});*/
-
-		if (post.content.includes("[") && post.content.includes("]")) {
-			var squareb_1 = post.content.indexOf("[")
-			var squareb_2 = post.content.indexOf("]")
-
-			var img_content = post.content.slice(squareb_1+1,squareb_2)
-			var sep_img = img_content.split(": ")
-			var img_url = sep_img[1]
-			var urls = ["http.meower.org","assets.meower.org","cdn.meower.org","api.meower.org","forums.meower.org","cubeupload.com","i.ibb.co","media.tenor.com","tenor.com","c.tenor.com","bettermeower.app","blog.bettermeower.app","open.bettermeower.app"]
 			try {
-				if (urls.some(element => {
-					if (img_url.includes(element)) {
-						return true;
-					}
+				new URL(result.value[2]);
+			} catch (e) {
+				continue;
+			}
 
-					return false;
-				})) {
-					post.content = post.content.replace(post.content.slice(squareb_1,squareb_2+1),'')
-					var img_name = sep_img[0]
+			if (
+				!IMAGE_HOST_WHITELIST.some(o =>
+					result.value[2].toLowerCase().startsWith(o.toLowerCase())
+				)
+			)
+				return;
 
-					img1.className = "image_1"
-					img1.alt = img_name
-					img1.title = img_name
-					img1.src = img_url
-				}
-			} catch {}
-			
+			images.push({
+				title: result.value[1],
+				url: result.value[2],
+			});
+			// Prevent flooding
+			if (images.length >= 3) break;
 		}
+		images = images;
 
-		loadProfile(post.user);
-	};
+		if (!webhook) loadProfile(post.user);
+	}
 	onMount(initPostUser);
+
+	$: noPFP =
+		post.user === "Notification" ||
+		post.user.startsWith("Notification to ") ||
+		post.user === "Announcement" ||
+		post.user === "Server" ||
+		webhook;
 </script>
 
 <Container>
 	<div class="post-header">
 		<div class="settings-controls">
-			{#if buttons && $user.name && $chatid !== "livechat" && post.user !== "Server"}	
+			{#if buttons && $user.name && $chatid !== "livechat" && post.user !== "Server"}
 				{#if input && post.user !== "Notification" && post.user !== "Announcement"}
-					<button 
+					<button
 						class="circle join"
 						on:click={() => {
 							let existingText = input.value;
@@ -128,92 +146,138 @@
 							const mention = "@" + post.user + " ";
 
 							if (mentionRegex.test(existingText)) {
-								input.value = existingText.trim().replace(
-									mentionRegex,
-									mention
-								);
+								input.value = existingText
+									.trim()
+									.replace(mentionRegex, mention);
 							} else {
 								input.value = mention + existingText.trim();
 							}
 
 							input.focus();
-
-							//OoooOOOooOOOOOOooOOO
-							//- Bloctans
 						}}
-					></button>
+					/>
 				{/if}
-				{#if $user.lvl >= 1 || post.user === $user.name}
-					<button
-						class="circle close"
-						on:click={()=>{
-							if (shiftHeld) {
-								clm.meowerRequest({
-									cmd: "direct",
-									val: {
-										cmd: "delete_post",
-										val: post.post_id,
-									},
-								});
-								return;
-							}
-							postClicked.set(post);
-							modalPage.set("deletePost");
-							modalShown.set(true);
-						}}
-					></button>
-				{:else}
-					<button
-						class="circle report"
-						on:click={()=>{
-							postClicked.set(post);
-							modalPage.set("reportPost");
-							modalShown.set(true);
-						}}
-					></button>
+				{#if canDoActions}
+					{#if $user.lvl >= 1 || post.user === $user.name}
+						<button
+							class="circle trash"
+							on:click={() => {
+								if (shiftHeld) {
+									clm.meowerRequest({
+										cmd: "direct",
+										val: {
+											cmd: "delete_post",
+											val: post.post_id,
+										},
+									});
+									return;
+								}
+								postClicked.set(post);
+								modalPage.set("deletePost");
+								modalShown.set(true);
+							}}
+						/>
+					{:else}
+						<button
+							class="circle report"
+							on:click={() => {
+								postClicked.set(post);
+								modalPage.set("reportPost");
+								modalShown.set(true);
+							}}
+						/>
+					{/if}
 				{/if}
 			{/if}
 		</div>
 		<button
-			class="pfp" 
-			on:click={()=>{
-				if (post.user === "Notification" || post.user === "Announcement" || post.user === "Server" || webhook) return;
+			class="pfp"
+			on:click={async () => {
+				if (noPFP) return;
+				page.set("");
+				await tick();
 				profileClicked.set(post.user);
 				page.set("profile");
 			}}
 		>
-			<PFP
-				icon={$profileCache[post.user] ? $profileCache[post.user].pfp_data : -3}
-				alt="{post.user}'s profile picture"
-				online={$ulist.includes(post.user)}
-			></PFP>
+			{#await noPFP ? Promise.resolve(true) : loadProfile(post.user)}
+				<PFP
+					icon={-2}
+					alt="{post.user}'s profile picture"
+					online={$ulist.includes(post.user)}
+				/>
+			{:then profile}
+				<PFP
+					icon={noPFP
+						? post.user === "Server"
+							? 102
+							: post.post_origin === "inbox" &&
+							  (post.user === "Announcement" ||
+									post.user === "Notification" ||
+									post.user.startsWith("Notification to"))
+							? 101
+							: -2
+						: profile.pfp_data}
+					alt="{post.user}'s profile picture"
+					online={$ulist.includes(post.user)}
+				/>
+			{:catch}
+				<PFP
+					icon={-2}
+					alt="{post.user}'s profile picture"
+					online={$ulist.includes(post.user)}
+				/>
+			{/await}
 		</button>
-		<div class="creator">
-			<h2 class="creator">{post.user}</h2>
+		<div class="creatordate">
+			<div class="creator">
+				<h2>
+					<LiText text={post.user} />
+				</h2>
 
-			<FormattedDate date={post.date}></FormattedDate>
-			{#if bridged}
-				<i>[BRIDGED]</i>
-			{/if}
+				{#if bridged}
+					<Badge
+						text="BRIDGED"
+						title="This post is bridged from an external service by a bot"
+					/>
+				{/if}
 
-			{#if webhook}
-				<i>[WEBHOOKS]</i>
+				{#if webhook}
+					<Badge
+						text="WEBHOOK"
+						title="This post was posted by the @Webhooks bot. The username may not mean the user actually posted it!"
+					/>
+				{/if}
+
+				<!-- disabled until proper bot badges are added
+				{#if post.isvbot && !webhook}
+					<Badge
+						text="BOT"
+						title="This bot has been verified"
+						checkmark={true}
+					/>
+				{/if}
+
+				{#if post.isuvbot && !webhook}
+					<Badge text="BOT" title="This bot has not been verified" />
+				{/if}
+				-->
+			</div>
+
+			<FormattedDate date={post.date} />
+			{#if post.isDeleted}
+				<i>(deleted)</i>
 			{/if}
 		</div>
 	</div>
-	<div id="img_outer">
-		<!-- svelte-ignore a11y-img-redundant-alt -->
-		<img src="" alt="Embedded Image" title="Embedded Image" class="post-image-hide image_1" bind:this={img1}>
+	<p class="post-content">{post.content}</p>
+	<div class="post-images">
+		{#each images as { title, url }}
+			<a href={url} target="_blank" rel="noreferrer"
+				><img src={url} alt={title} {title} class="post-image" />
+			</a>
+		{/each}
 	</div>
-	<p class="post-content">
-		{emoji.emojify(post.content)}
-	</p>
-	<!--<button
-	on:click={()=>{
-		navigator.clipboard.writeText("https://api.meower.org/posts/"+post.post_id);
-	}}>Copy API Link</button>-->
-	<!--hi-->
-	<!--Help i am trying to hide a commit-->
 </Container>
 
 <style>
@@ -228,20 +292,26 @@
 		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
-	}
-	.post-image-hide {position: absolute; visibility: hidden;}
-
-	.creator {
-		display: inline;
 		max-width: 100%;
+	}
+
+	.creatordate {
 		margin-left: 0.5em;
 	}
+	.creator {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.5em;
+	}
 	.creator h2 {
-		display: block;
 		font-size: 200%;
 		margin: 0;
+		overflow-wrap: anywhere;
 	}
-	.pfp:hover:not(:active) :global(.pfp), .pfp:focus-visible :global(.pfp) {
+	:global(main.input-hover) .pfp:hover:not(:active) :global(.pfp),
+	:global(main.input-touch) .pfp:active :global(.pfp),
+	.pfp:focus-visible :global(.pfp) {
 		transform: scale(1.1);
 	}
 	.post-content {
@@ -256,5 +326,16 @@
 		border: none;
 		margin: 0;
 		margin-left: 0.125em;
+	}
+
+	.post-image {
+		max-height: 12em;
+		max-width: 100%;
+	}
+
+	.post-images {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25em;
 	}
 </style>
