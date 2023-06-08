@@ -166,7 +166,7 @@
 
 	// Replace "dev" in variable name with release when releasing as main
 	// Change variable name to name relevant with the news page's subject.
-	if (localStorage.getItem("1-5-0-updates-dev") === null) {
+	if (localStorage.getItem("classic-release") === null) {
 							$modalPage = "NewsModal"
 							$modalShown = true
 							spinner.set(false);
@@ -335,7 +335,7 @@
 				id="postinput"
 				name="postinput"
 				autocomplete="false"
-				maxlength="4000"
+				maxlength=""
 				rows="1"
 				use:autoresize
 				on:input={() => {

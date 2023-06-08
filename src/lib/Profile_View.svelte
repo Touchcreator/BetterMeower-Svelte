@@ -91,7 +91,7 @@
                         <button
                             class="circle report"
                             on:click = {()=>{
-                                $modalPage = "ReportUser";
+                                $modalPage = "ReportUserModal";
 					            $modalShown = true;
                             }}
                         ></button>
