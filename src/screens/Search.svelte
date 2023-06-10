@@ -26,7 +26,7 @@
         Find all the legit users, memes and namesnipes.
     </Container>
     <Container>
-       <!-- <div class="settings-controls">
+       <div class="settings-controls">
             <button
                 class="circle search disabled"
                 on:click={() => {
@@ -34,10 +34,10 @@
                     Show("Search")
                 }}
             ></button>
-        </div> -->
+        </div>
 
         <h1>Search Posts</h1>
-        <s>Find posts and maybe even relics.</s> <b>Searching for posts is currently disabled for server maintenence.</b>
+        Find posts and maybe even relics.
     </Container>
     <Container>
         <div class="settings-controls">
