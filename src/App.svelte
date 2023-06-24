@@ -279,19 +279,19 @@ IS NEEDED FOR THE TRANSITION TO WORK
 		--foreground-orange: white;
 	}
 	#main.theme-green {
-		--orange: #2cbe00;
-		--orange-light: #30ce00;
-		--orange-dark: #26a300;
-		--orange-scrollbar-back: #229200;
+		--orange: #57e389;
+		--orange-light: #8ff0a4;
+		--orange-dark: #26a269;
+		--orange-scrollbar-back: #26a269;
 		--background: #ffffff;
 		--foreground: black;
 		--foreground-orange: #eef;
 	}
 	#main.theme-green.mode-dark {
-		--orange: #2cbe00;
-		--orange-light: #30ce00;
-		--orange-dark: #26a300;
-		--orange-scrollbar-back: #229200;
+		--orange: #57e389;
+		--orange-light: #8ff0a4;
+		--orange-dark: #26a269;
+		--orange-scrollbar-back: #26a269;
 		--background: #202020;
 		--foreground: #eef;
 		--foreground-orange: #eef;
