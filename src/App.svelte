@@ -103,9 +103,9 @@ IS NEEDED FOR THE TRANSITION TO WORK
 					{:else if $disconnectReason === "E:119 | IP Blocked"}
 						The server has blocked your IP address ({link.ip}).
 					{:else if $disconnectReason == "E:110 | ID conflict"}
-						There has been a hiccup! Looks like you logged into Meower from another device.
+						It looks like you've logged into Meower from another device or browser tab.
 						<br /><br />
-						Please check any devices currently logged into Meower and try again.
+						Meower only allows 1 active session per account, so to continue here, you'll need to reconnect and log back in.
 					{:else if $disconnectReason == "E:018 | Account Banned"}
 						You have been banned by a moderator.
 					{:else if $disconnectReason == "E:020 | Kicked"}
