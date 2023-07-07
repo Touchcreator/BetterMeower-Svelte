@@ -130,6 +130,7 @@
 		post.user.startsWith("Notification to ") ||
 		post.user === "Announcement" ||
 		post.user === "Server" ||
+		post.user === "guest" ||
 		webhook;
 </script>
 
