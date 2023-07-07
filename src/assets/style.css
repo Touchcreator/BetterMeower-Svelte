@@ -1,42 +1,29 @@
 @font-face {
-	font-family: simvoni;
-	src: url(./font/Simvoni.ttf);
-	font-display: swap;
+    font-family: simvoni;
+    src: url(./font/Simvoni.ttf);
+    font-display: swap;
 }
 
 @font-face {
-	font-family: simvoni;
-	src: url(./font/Simvoni-Bold.ttf);
-	font-weight: bold;
-	font-display: swap;
+    font-family: simvoni-bold;
+    src: url(./font/Simvoni-Bold.ttf);
+	font-weight: normal;
+    font-display: swap;
 }
 
 @font-face {
-	font-family: simvoni;
-	src: url(./font/Simvoni-BoldItalic.ttf);
-	font-weight: bold;
-	font-style: italic;
-	font-display: swap;
+    font-family: simvoni-bolditalic;
+    src: url(./font/Simvoni-BoldItalic.ttf);
+	font-style: normal;
+	font-weight: normal;
+    font-display: swap;
 }
 
 @font-face {
-	font-family: simvoni;
-	src: url(./font/Simvoni-Italic.ttf);
-	font-style: italic;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: simvoni-il;
-	src: url(./font/ModifiedSimvoni.ttf);
-	font-display: swap;
-}
-
-@font-face {
-	font-family: simvoni-il;
-	src: url(./font/ModifiedSimvoni-Bold.ttf);
-	font-weight: bold;
-	font-display: swap;
+    font-family: simvoni-italic;
+    src: url(./font/Simvoni-Italic.ttf);
+	font-style: normal;
+    font-display: swap;
 }
 
 .settings-controls {
