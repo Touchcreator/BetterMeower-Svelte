@@ -4,6 +4,7 @@
 	import PFP from "./PFP.svelte";
 	import FormattedDate from "./FormattedDate.svelte";
 	import Badge from "./Badge.svelte";
+    import ReplyPost from "./ReplyPost.svelte";
 
 	import LiText from "./LiText.svelte";
 
@@ -142,8 +143,8 @@
 						on:click={() => {
 							let existingText = input.value;
 
-							const mentionRegex = /^@\w+\s*/i;
-							const mention = "@" + post.user + " ";
+							const mentionRegex = /^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i;
+							const mention = `@${post.user} [${post.post_id}] `;
 
 							if (mentionRegex.test(existingText)) {
 								input.value = existingText
@@ -270,7 +271,13 @@
 			{/if}
 		</div>
 	</div>
-	<p class="post-content">{post.content}</p>
+    {#if post.content.search(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i) != -1}
+        <br>
+        <ReplyPost post={post.content.split(" ").splice(1, 1)[0].replace("[", "").replace("]", "")} />
+	    <p class="post-content">{post.content.split(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i).join(" ")}</p>
+    {:else}
+        <p class="post-content">{post.content}</p>
+    {/if}
 	<div class="post-images">
 		{#each images as { title, url }}
 			<a href={url} target="_blank" rel="noreferrer"

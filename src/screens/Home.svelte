@@ -167,8 +167,8 @@
 	// Replace "dev" in variable name with release when releasing as main
 	// Change variable name to name relevant with the news page's subject.
 	if (localStorage.getItem("classic-release") === null) {
-							$modalPage = "NewsModal"
-							$modalShown = true
+							$modalPage = "NewsModal";
+							$modalShown = true;
 							spinner.set(false);
 						}
 
@@ -377,6 +377,7 @@
 				<div
 					transition:fly|local="{{y: -50, duration: 250}}"
 					animate:flip="{{duration: 250}}"
+                    id={post.post_id}
 				>
 					<Post post={post} input={postInput} />
 				</div>
