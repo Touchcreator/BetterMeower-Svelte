@@ -45,6 +45,8 @@
         {:else}
             <span><b>{info.u}</b> {info.p.split(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i).join(" ")}</span>
         {/if}
+    {:catch error}
+        <span><b>Error fetching post:</b> <code>{error}</code></span>
     {/await}
 </Container>
 

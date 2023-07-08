@@ -1,16 +1,13 @@
-window.onkeydown = function (e) {
-    if (!e) e = window.event;
-    shiftHeld = e.shiftKey;
-}
+window.addEventListener("keydown", (e) => {
+    shiftHeld = (e.key === "Shift");
+});
 
-window.onkeyup = function (e) {
-    if (!e) e = window.event;
-    shiftHeld = e.shiftKey;
-}
+window.addEventListener("keyup", (e) => {
+    shiftHeld = (e.key === "Shift");
+});
 
-window.onmousemove = function (e) {
-    if (!e) e = window.event;
+window.addEventListener("mousemove", (e) => {
     shiftHeld = e.shiftKey;
-}
+});
 
 export let shiftHeld;
