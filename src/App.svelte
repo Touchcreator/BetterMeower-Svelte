@@ -130,11 +130,6 @@ IS NEEDED FOR THE TRANSITION TO WORK
 							setupPage.set("reconnect");
 						}
 					}}>Reconnect</button>
-					<button on:click={async () => {
-						localStorage.removeItem("meower_linkurl")
-						localStorage.removeItem("meower_apiurl")
-						location.reload()
-					}}>Reset Server URLS</button>
 					{#if ((localStorage.getItem("SkipDisconnect") == "true") && true || false)}
 						<button on:click={() => {
 							disconnected.set(false);
