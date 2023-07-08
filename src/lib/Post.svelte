@@ -138,6 +138,14 @@
 	<div class="post-header">
 		<div class="settings-controls">
 			{#if buttons && $user.name && $chatid !== "livechat" && post.user !== "Server"}
+                {#if post.content.search(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i) != -1}
+                    <button
+                        class="circle jump"
+                        on:click={() => {
+                            document.getElementById(post.content.split(" ").splice(1, 1)[0].replace("[", "").replace("]", "")).scrollIntoView();
+                        }}
+                    />
+                {/if}
 				{#if input && post.user !== "Notification" && post.user !== "Announcement"}
 					<button
 						class="circle join"

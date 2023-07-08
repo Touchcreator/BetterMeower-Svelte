@@ -1,30 +1,9 @@
-<!-- A post. Profile pictures not appearing while not logged in is intentional. -->
+<!-- A reply. -->
 <script>
 	import Container from "./Container.svelte";
     import {apiUrl} from "./urls.js";
 
-	import {onMount, tick} from "svelte";
-
 	export let post;
-
-    function initPostUser() {
-        if (!post.user) return;
-
-		if (post.content.includes(":")) {
-			let bridged =
-				post.user === "Discord" ||
-				post.user === "revolt" ||
-				post.user === "Revower";
-			let webhook = post.user == "Webhooks";
-		}
-
-		if (bridged || webhook) {
-			post.user = post.content.split(": ")[0];
-			post.content = post.content.slice(post.content.indexOf(": ") + 1);
-		}
-    }
-
-    onMount(initPostUser);
 </script>
 
 <Container>
@@ -36,17 +15,26 @@
             <b class="text">Loading...</b>
         </span>
     {:then info}
-        {#if info.p.includes(":") ||
+        {#if info.p.includes(":") &&
             info.u === "Discord" ||
             info.u === "revolt" ||
             info.u === "Revower"
         }
-            <span><b>{info.p.split(": ")[0]}</b> {info.p.slice(info.p.indexOf(": ") + 1)}</span>
+            <span>
+                <b>{info.p.split(": ")[0]}</b>
+                {info.p.slice(info.p.indexOf(": ") + 1)}
+            </span>
         {:else}
-            <span><b>{info.u}</b> {info.p.split(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i).join(" ")}</span>
+            <span>
+                <b>{info.u}</b>
+                {info.p.split(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i).join(" ")}
+            </span>
         {/if}
     {:catch error}
-        <span><b>Error fetching post:</b> <code>{error}</code></span>
+        <span>
+            <b>Error fetching post:</b>
+            <code>{error}</code>
+        </span>
     {/await}
 </Container>
 
