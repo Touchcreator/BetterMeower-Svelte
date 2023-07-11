@@ -138,14 +138,6 @@
 	<div class="post-header">
 		<div class="settings-controls">
 			{#if buttons && $user.name && $chatid !== "livechat" && post.user !== "Server"}
-                {#if post.content.search(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i) != -1}
-                    <button
-                        class="circle jump"
-                        on:click={() => {
-                            document.getElementById(post.content.split(" ").splice(1, 1)[0].replace("[", "").replace("]", "")).scrollIntoView();
-                        }}
-                    />
-                {/if}
 				{#if input && post.user !== "Notification" && post.user !== "Announcement"}
 					<button
 						class="circle join"
@@ -212,7 +204,7 @@
 		>
 			{#await noPFP ? Promise.resolve(true) : loadProfile(post.user)}
 				<PFP
-					icon={-2}
+					icon={-1}
 					alt="{post.user}'s profile picture"
 					online={$ulist.includes(post.user)}
 				/>
@@ -226,7 +218,7 @@
 									post.user === "Notification" ||
 									post.user.startsWith("Notification to"))
 							? 101
-							: -2
+							: "err"
 						: profile.pfp_data}
 					alt="{post.user}'s profile picture"
 					online={$ulist.includes(post.user)}

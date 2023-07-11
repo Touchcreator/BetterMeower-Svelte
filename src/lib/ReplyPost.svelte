@@ -1,6 +1,7 @@
 <!-- A reply. -->
 <script>
 	import Container from "./Container.svelte";
+    import PFP from "./PFP.svelte";
     import {apiUrl} from "./urls.js";
 
 	export let post;
@@ -20,11 +21,41 @@
             info.u === "revolt" ||
             info.u === "Revower"
         }
+            {#await fetch(`https://api.meower.org/users/${info.p.split(": ")[0]}`).then(res => res.json())}
+                <PFP
+                    icon={-1}
+                    alt="{info.p.split(": ")[0]}'s profile picture"
+                    online={false}
+                    size={0.3}
+                />
+            {:then user} 
+                <PFP
+                    icon={user.pfp_data}
+                    alt="{info.p.split(": ")[0]}'s profile picture"
+                    online={false}
+                    size={0.3}
+                />
+            {/await}
             <span>
                 <b>{info.p.split(": ")[0]}</b>
                 {info.p.slice(info.p.indexOf(": ") + 1)}
             </span>
         {:else}
+            {#await fetch(`https://api.meower.org/users/${info.u}`).then(res => res.json())}
+                <PFP
+                    icon={-1}
+                    alt="{info.u}'s profile picture"
+                    online={false}
+                    size={0.3}
+                />
+            {:then user} 
+                <PFP
+                    icon={user.pfp_data}
+                    alt="{info.u}'s profile picture"
+                    online={false}
+                    size={0.3}
+                />
+            {/await}
             <span>
                 <b>{info.u}</b>
                 {info.p.split(/^@\w+\s\[\w+-\w+-\w+-\w+-\w+\]\s*/i).join(" ")}

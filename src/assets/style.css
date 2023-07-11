@@ -216,10 +216,6 @@ button.leave {
     background-image: url("./logout.svg");
     background-size: 50%;
 }
-button.jump {
-    background-image: url("./jump.svg");
-    background-size: 50%;
-}
 input[type="checkbox"]:hover:not(:active):enabled,
 button.circle:hover:not(:active):enabled {
 	transform: scale(1.2);
