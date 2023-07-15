@@ -176,8 +176,6 @@
 	ulist.subscribe(val => {
 		_ulist = val;
 	})
-
-
 </script>
 
 <div class="home">
@@ -219,11 +217,11 @@
 				>
 			</div>-->
 			<!--Zed just told me the cl4 port will move the mod panel to a seperate site-->
-			<h1>Home</h1>
+			<h1>{window.i18n.gettext("Home")}</h1>
 			{#if $user.name}
-				Welcome back <b>@{$user.name}!</b>
+				{window.i18n.gettext("Welcome back,")} <b>@{$user.name}!</b>
 			{:else}
-				<b>Hello guest</b>! To sign in or create an account, click the profile button on the sidebar.
+				<b>{window.i18n.gettext("Hello, guest!")}</b> {window.i18n.gettext("To sign in or create an account, click the profile button on the sidebar.")}
 			{/if}
 		</Container>
 		<Container>
@@ -238,9 +236,9 @@
 					There are currently 0 users online
 				{/if}
 			{:else}
-				<b>Users Online:</b>{#if _ulist.length}{" "}{_ulist.join(", ")}{/if}.
+				<b>{window.i18n.gettext("Users Online")}:</b>{#if _ulist.length}{" "}{_ulist.join(", ")}{/if}.
 				<br>
-				There are currently <b>{_ulist.length}</b> users online
+				{window.i18n.gettext("There are currently")} <b>{_ulist.length}</b> {window.i18n.gettext("users online")}
 			{/if}
 		</Container>
 		<!--<Container>
@@ -331,7 +329,7 @@
 			<textarea
 				type="text"
 				class="white"
-				placeholder="Write something..."
+				placeholder={window.i18n.gettext("Write something...")}
 				id="postinput"
 				name="postinput"
 				autocomplete="false"
@@ -363,7 +361,7 @@
 				}}
 				bind:this={postInput}
 			></textarea>
-			<button id="submitpost">Post</button>
+			<button id="submitpost">{window.i18n.gettext("Post")}</button>
 		</form>
 		<div class="post-errors">{postErrors}</div>
 		<TypingIndicator />

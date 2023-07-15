@@ -50,7 +50,11 @@
     import SetQuote from "./lib/modals/SetQuote.svelte";
     import ModPanel from "./lib/ModPanel.svelte";
 
+    import {i18n_config} from "./lib/i18n.js";
+
 	// let notificationRequest = Notification.requestPermission();
+
+    i18n_config();
 </script>
 
 <!--

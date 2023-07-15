@@ -326,7 +326,6 @@
 		<button id="submitpost5">Set</button>
 	</form>
 </Container>
-
 <style>
 	.settings-controls {
 		position: absolute;

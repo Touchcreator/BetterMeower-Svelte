@@ -15,47 +15,26 @@
     	var msPerDay = msPerHour * 24;
     	var msPerMonth = msPerDay * 30;
     	var msPerYear = msPerDay * 365;
-    	var current = new Date().getTime();
-    	var elapsed = current - timestamp;
+    	var elapsed = new Date().getTime() - timestamp;
 
     	if (elapsed < msPerMinute) {
 			if (1 < Math.round(elapsed/1000)) {
-            	return `${Math.round(elapsed/1000)} seconds ago`; 
+            	return window.i18n.sprintf(window.i18n.ngettext("1 second ago", "1 second ago", 0), Math.round(elapsed/1000));
         	} else if (Math.round(elapsed/1000) == 0 || `${Math.round(elapsed/1000)}`.startsWith("-")) {
-				return "just now";
+				return window.i18n.gettext("just now");
 			} else {
-            	return `${Math.round(elapsed/1000)} second ago`;
+            	return window.i18n.gettext("1 second ago");
         	}  
     	} else if (elapsed < msPerHour) {
-        	if (1 < Math.round(elapsed/msPerMinute)) {
-            	return `${Math.round(elapsed/msPerMinute)} minutes ago`;
-        	} else {
-            	return `${Math.round(elapsed/msPerMinute)} minute ago`;
-        	}  
+        	return window.i18n.sprintf(window.i18n.ngettext("1 minute ago", "1 minute ago", 0), Math.round(elapsed/msPerMinute));
     	} else if (elapsed < msPerDay) {
-        	if (1 < Math.round(elapsed/msPerHour)) {
-            	return `${Math.round(elapsed/msPerHour)} hours ago`; 
-        	} else {
-            	return `${Math.round(elapsed/msPerHour)} hour ago`;
-        	}  
+        	return window.i18n.sprintf(window.i18n.ngettext("1 hour ago", "1 hour ago", 0), Math.round(elapsed/msPerHour));  
     	} else if (elapsed < msPerMonth) {
-        	if (1 < Math.round(elapsed/msPerDay)) {
-            	return `${Math.round(elapsed/msPerDay)} days ago`;
-        	} else {
-            	return `${Math.round(elapsed/msPerDay)} day ago`;
-        	}
+            return window.i18n.sprintf(window.i18n.ngettext("1 day ago", "1 day ago", 0), Math.round(elapsed/msPerDay));
     	} else if (elapsed < msPerYear) {
-        	if (1 < Math.round(elapsed/msPerMonth)) {
-            	return `${Math.round(elapsed/msPerMonth)} months ago`;
-        	} else {
-            	return `${Math.round(elapsed/msPerMonth)} month ago`;
-       		}
+            return window.i18n.sprintf(window.i18n.ngettext("1 day ago", "1 day ago", 0), Math.round(elapsed/msPerMonth));
     	} else {
-        	if (1 < elapsed/msPerYear) {
-            	return `${Math.round(elapsed/msPerYear)} years ago`;
-        	} else {
-            	return `${Math.round(elapsed/msPerYear)} year ago`;
-        	}
+            return window.i18n.sprintf(window.i18n.ngettext("1 year ago", "1 year ago", 0), Math.round(elapsed/msPerYear));
     	}
 	}
 	 
