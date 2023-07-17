@@ -21,5 +21,7 @@
     "1 month ago": ["1 month ago", "%d months ago"],
     "1 year ago": ["1 year ago", "%d years ago"],
     "Connecting...": ["Connecting..."],
-    "Logging in...": ["Logging in..."]
+    "Logging in...": ["Logging in..."],
+    "Me-owch.": ["Me-owch."],
+    "Something went wrong and the connection to Meower was lost.": ["Something went wrong and the connection to Meower was lost."]
 }
