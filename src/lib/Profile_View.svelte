@@ -54,9 +54,9 @@
                     <h1 class="profile-username">{username}</h1>
                     <div class="profile-active">
                         {#if data.banned == false}
-                            {$ulist.includes(username) ? "Online" : "Offline"}
+                            {$ulist.includes(username) ? window.i18n.gettext("Online") : window.i18n.gettext("Offline")}
                         {:else}
-                            Banned
+                            {window.i18n.gettext("Banned")}
                         {/if}
                     </div>
                     <div class="profile-role">

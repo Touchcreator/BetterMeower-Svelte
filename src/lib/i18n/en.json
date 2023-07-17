@@ -24,5 +24,9 @@
     "Logging in...": ["Logging in..."],
     "Me-owch.": ["Me-owch."],
     "Something went wrong and the connection to Meower was lost.": ["Something went wrong and the connection to Meower was lost."],
-    "Reconnecting to Meower...": ["Reconnecting to Meower..."]
+    "Reconnecting to Meower...": ["Reconnecting to Meower..."],
+    "Reconnect": ["Reconnect"],
+    "Online": ["Online"],
+    "Offline": ["Offline"],
+    "Banned": ["Banned"]
 }

@@ -130,7 +130,7 @@ IS NEEDED FOR THE TRANSITION TO WORK
 							await tick();
 							setupPage.set("reconnect");
 						}
-					}}>Reconnect</button>
+					}}>{window.i18n.gettext("Reconnect")}</button>
 					{#if ((localStorage.getItem("SkipDisconnect") == "true") && true || false)}
 						<button on:click={() => {
 							disconnected.set(false);

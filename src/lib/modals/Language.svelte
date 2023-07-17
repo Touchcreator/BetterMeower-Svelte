@@ -19,8 +19,6 @@
             i18n_config("fr");
             $modalShown = false;
         }}>Français</button>
-        <br><br>
-        <div class="smol">Don't see your language here? Contribute it to BetterMeower!</div>
 	</div>
 </Modal>
 
