@@ -1,7 +1,7 @@
 // @ts-nocheck
 import Jed from "jed";
 
-export async function i18n_config(language="fr") {
+export async function i18n_config(language) {
     const data = {
         "en": await fetch(
                 new URL(
@@ -17,6 +17,5 @@ export async function i18n_config(language="fr") {
             ).then(res => res.json())
     };
 
-    window.i18n = new Jed({ "locale_data": data, "domain": language });
-    // navigator.language.split("-")[0]
+    window.i18n = new Jed({ "locale_data": data, "domain": (language in data ? language : "en") });
 }

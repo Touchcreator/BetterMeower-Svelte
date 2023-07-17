@@ -125,6 +125,20 @@
 	<h2>Log out everywhere</h2>
 	Clear all saved tokens and log out everywhere
 </Container>
+<Container>
+	<div class="settings-controls">
+		<button
+			class="circle settings"
+			on:click={async () => {
+				$modalPage = "language";
+				$modalShown = true;
+			}}
+		></button>
+	</div>
+
+	<h2>Language</h2>
+	Change the language
+</Container>
 <!--<hr>
 <Container>
 	<h1>Imgbb</h1>

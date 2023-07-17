@@ -13,7 +13,7 @@
     "Post": ["Post"],
     "Write something...": ["Write something..."],
     "There are currently": ["There are currently"],
-    "1 minute ago": ["1 minute ago", "%d minutes"],
+    "1 minute ago": ["1 minute ago", "%d minutes ago"],
     "just now": ["just now"],
     "1 second ago": ["1 second ago", "%d seconds ago"],
     "1 hour ago": ["1 hour ago", "%d hours ago"],
@@ -23,5 +23,6 @@
     "Connecting...": ["Connecting..."],
     "Logging in...": ["Logging in..."],
     "Me-owch.": ["Me-owch."],
-    "Something went wrong and the connection to Meower was lost.": ["Something went wrong and the connection to Meower was lost."]
+    "Something went wrong and the connection to Meower was lost.": ["Something went wrong and the connection to Meower was lost."],
+    "Reconnecting to Meower...": ["Reconnecting to Meower..."]
 }

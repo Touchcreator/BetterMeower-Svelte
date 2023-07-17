@@ -21,5 +21,8 @@
     "1 month ago": ["1 mois il y a", "%d mois il y a"],
     "1 year ago": ["1 année il y a", "%d année il y a"],
     "Connecting...": ["Connectant..."],
-    "Logging in...": ["Abattage dans..."]
+    "Logging in...": ["Abattage dans..."],
+    "Me-owch.": ["Mi-aïe."],
+    "Something went wrong and the connection to Meower was lost.": ["Quelque chose sont allés de travers et le connexion à Meower être qui se perd."],
+    "Reconnecting to Meower...": ["Reconnexion à Meower..."]
 }

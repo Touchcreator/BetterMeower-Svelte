@@ -33,6 +33,7 @@
 	import SearchModal from "./lib/modals/Search.svelte";
 	import Chatlist_AddChatModal from "./lib/modals/Chatlist_AddChat.svelte";
 	import ChangeStoreModal from "./lib/modals/ChangeStore.svelte";
+    import LanguageModal from "./lib/modals/Language.svelte";
 
 	import {mobile} from "./lib/responsiveness.js";
 	import Spinner from "./lib/Spinner.svelte";
@@ -54,8 +55,8 @@
 
 	// let notificationRequest = Notification.requestPermission();
 
-    onMount(async () => {
-        i18n_config();
+    onMount(() => {
+        i18n_config(navigator.language.split("-")[0]);
     });
 </script>
 
@@ -98,12 +99,12 @@ IS NEEDED FOR THE TRANSITION TO WORK
 	{#if $disconnected}
 		<Modal>
 			<h2 slot="header">
-				Me-owch.
+				{window.i18n.gettext("Me-owch.")}
 			</h2>
 			<div slot="default">
 				<p>
 					{#if $disconnectReason === ""}
-						Something went wrong and the connection to Meower was lost.
+						{window.i18n.gettext("Something went wrong and the connection to Meower was lost.")}
 					{:else if $disconnectReason === "Failed to load userdata"}
 						An unexpected error occurred while trying to load your userdata! Check console for more information.
 					{:else if $disconnectReason === "E:119 | IP Blocked"}
@@ -201,6 +202,8 @@ IS NEEDED FOR THE TRANSITION TO WORK
 			<Chatlist_AddChatModal />
 		{:else if $modalPage === "Change_store"}
 			<ChangeStoreModal />
+        {:else if $modalPage === "language"}
+			<LanguageModal />
 		{:else}
 			<ErrorModal />
 		{/if}

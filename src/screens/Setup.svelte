@@ -200,7 +200,7 @@
 		</div>
 	{:else if $page === "reconnect"}
 		<div class="fullcenter">
-			Reconnecting to Meower Servers...
+			{window.i18n.gettext("Reconnecting to Meower...")}
 		</div>
 	{:else if $page === "welcome"}
 		<div class="fullcenter">
