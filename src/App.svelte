@@ -51,13 +51,7 @@
     import SetQuote from "./lib/modals/SetQuote.svelte";
     import ModPanel from "./lib/ModPanel.svelte";
 
-    import {i18n_config} from "./lib/i18n.js";
-
 	// let notificationRequest = Notification.requestPermission();
-
-    onMount(() => {
-        i18n_config(navigator.language.split("-")[0]);
-    });
 </script>
 
 <!--

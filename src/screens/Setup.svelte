@@ -21,7 +21,9 @@
 	import {fade} from 'svelte/transition';
 	import sleep from "../lib/sleep.js";
 
-	import {linkUrl,apiUrl} from "../lib/urls.js"
+	import {linkUrl,apiUrl} from "../lib/urls.js";
+
+    import {i18n_config} from "./lib/i18n.js";
 
 	const _user = $user;
 	_user.mode = !_user.mode;
@@ -40,6 +42,8 @@
 	let acceptTerms = false;
 
 	onMount(() => {
+        i18n_config(navigator.language.split("-")[0]);
+        
 		page.subscribe(async value => {
 			if (!setup) return;
 			const _user = $user;
