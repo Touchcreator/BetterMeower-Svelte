@@ -24,5 +24,6 @@
     "Logging in...": ["Abattage dans..."],
     "Me-owch.": ["Mi-aïe."],
     "Something went wrong and the connection to Meower was lost.": ["Quelque chose sont allés de travers et le connexion à Meower être qui se perd."],
-    "Reconnecting to Meower...": ["Reconnexion à Meower..."]
+    "Reconnecting to Meower...": ["Reconnexion à Meower..."],
+    "Reconnect": ["Se reconnecter"]
 }
