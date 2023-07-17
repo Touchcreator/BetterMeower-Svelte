@@ -42,7 +42,7 @@
 	let acceptTerms = false;
 
 	onMount(() => {
-        i18n_config(navigator.language.split("-")[0]);
+        i18n_config((localStorage.getItem("language") ? localStorage.getItem("language") : navigator.language.split("-")[0]));
 
 		page.subscribe(async value => {
 			if (!setup) return;

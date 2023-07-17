@@ -9,11 +9,17 @@
     <h2 slot="header">Change Language</h2>
     <div slot="default">
 		<button class="long" on:click={() => {
+            localStorage.setItem("language", "en");
             i18n_config("en");
+            $modalShown = false;
         }}>English</button>
+        <br>
         <button class="long" on:click={() => {
+            localStorage.setItem("language", "fr");
             i18n_config("fr");
+            $modalShown = false;
         }}>Français</button>
+        <br><br>
         <div class="smol">Don't see your language here? Contribute it to BetterMeower!</div>
 	</div>
 </Modal>
@@ -22,4 +28,8 @@
 	.smol {
 		font-size: 8px;
 	}
+
+    .long {
+        width: 100%;
+    }
 </style>
