@@ -4,8 +4,10 @@ import Jed from "jed";
 export async function i18n_config() {
     const lang = {
         "fr": await fetch(
-            new URL("./i18n/fr.json").href,
-            import.meta.url
+            new URL(
+                "./i18n/fr.json",
+                import.meta.url
+            ).href
         ).then(res => res.json())
     };
 
