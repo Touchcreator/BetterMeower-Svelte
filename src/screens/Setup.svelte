@@ -68,7 +68,7 @@
 				logo.classList.add("top");
 
 				await sleep(700);
-				loginStatus = "Connecting...";
+				loginStatus = window.i18n.gettext("Connecting...");
 				console.log("Connecting to Meower server...");
 				await connect();
 
@@ -106,7 +106,7 @@
 	*/
 	function doLogin(username, password, autoLogin = false) {
 		try {
-			loginStatus = "Logging in...";
+			loginStatus = window.i18n.gettext("Logging in...");
 			console.log("Logging in...");
 			clm.meowerRequest({
 				cmd: "direct",

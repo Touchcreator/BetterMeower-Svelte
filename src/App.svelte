@@ -45,7 +45,7 @@
 		disconnected, disconnectReason,
 		user, spinner, modPanelOpen
 	} from "./lib/stores.js";
-	import {tick} from "svelte/internal"
+	import {onMount, tick} from "svelte/internal"
 	import {shiftHeld} from "./lib/keyDetect.js";
     import SetQuote from "./lib/modals/SetQuote.svelte";
     import ModPanel from "./lib/ModPanel.svelte";
@@ -54,7 +54,9 @@
 
 	// let notificationRequest = Notification.requestPermission();
 
-    i18n_config();
+    onMount(async () => {
+        i18n_config();
+    });
 </script>
 
 <!--
