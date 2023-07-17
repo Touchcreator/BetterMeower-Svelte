@@ -41,7 +41,7 @@
 	let rememberMe = false;
 	let acceptTerms = false;
 
-	onMount(() => {
+	onMount(async () => {
         i18n_config((localStorage.getItem("language") ? localStorage.getItem("language") : navigator.language.split("-")[0]));
 
 		page.subscribe(async value => {
