@@ -2,7 +2,7 @@
     "": {
         "domain": "ig",
         "language": "ig",
-        "plural-forms": "nplurals=2; plural=(n != 1);"
+        "plural-forms": "nplurals=2; plural=(n != 0);"
     },
     "Home": ["Ụlọ"],
     "Welcome back,": ["Nnọọ,"],
