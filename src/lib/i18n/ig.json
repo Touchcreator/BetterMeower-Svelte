@@ -1,7 +1,8 @@
 {
     "": {
         "domain": "ig",
-        "language": "ig"
+        "language": "ig",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
     },
     "Home": ["Ụlọ"],
     "Welcome back,": ["Nnọọ,"],
@@ -12,9 +13,9 @@
     "Post": ["Ziga"],
     "Write something...": ["Dee ihe..."],
     "There are currently": ["Enwere"],
-    "1 minute ago": ["%d nkeji gara aga"],
-    "just now": ["%d nkeji gara aga"],
-    "1 second ago": ["%d second ago"],
+    "1 minute ago": ["1 nkeji gara aga"],
+    "just now": ["naanị ugbu a"],
+    "1 second ago": ["1 second ago", "%d second ago"],
     "1 hour ago": ["1 hour ago"],
     "1 day ago": ["1 day ago"],
     "1 month ago": ["1 month ago"],
