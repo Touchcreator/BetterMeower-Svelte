@@ -14,7 +14,13 @@ export async function i18n_config(language) {
                     "./i18n/fr.json",
                     import.meta.url
                 ).href
-            ).then(res => res.json())
+            ).then(res => res.json()),
+        "ig": await fetch(
+                new URL(
+                    "./i18n/ig.json",
+                    import.meta.url
+                ).href
+            ).then(res => res.json()),       
     };
 
     window.i18n = new Jed({ "locale_data": data, "domain": (language in data ? language : "en") });
