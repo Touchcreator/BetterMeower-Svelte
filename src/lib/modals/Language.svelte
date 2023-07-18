@@ -25,7 +25,7 @@
             i18n_config("ig");
             $modalShown = false;
         }}>Igbo</button>
-	</div>
+	</div> 
 </Modal>
 
 <style>
