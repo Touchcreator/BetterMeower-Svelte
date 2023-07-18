@@ -19,6 +19,12 @@
             i18n_config("fr");
             $modalShown = false;
         }}>Français</button>
+        <br>
+        <button class="long" on:click={() => {
+            localStorage.setItem("language", "ig");
+            i18n_config("ig");
+            $modalShown = false;
+        }}>Igbo</button>
 	</div>
 </Modal>
 
