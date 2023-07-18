@@ -1,8 +1,7 @@
 {
     "": {
         "domain": "ig",
-        "language": "ig",
-        "plural-forms": "nplurals=2; plural=(n != 1);"
+        "language": "ig"
     },
     "Home": ["Ụlọ"],
     "Welcome back,": ["Nnọọ,"],
@@ -15,7 +14,7 @@
     "There are currently": ["Enwere"],
     "1 minute ago": ["%d nkeji gara aga"],
     "just now": ["%d nkeji gara aga"],
-    "1 second ago": ["1 second ago"],
+    "1 second ago": ["%d second ago"],
     "1 hour ago": ["1 hour ago"],
     "1 day ago": ["1 day ago"],
     "1 month ago": ["1 month ago"],
